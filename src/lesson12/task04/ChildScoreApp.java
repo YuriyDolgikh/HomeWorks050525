@@ -5,7 +5,7 @@ public class ChildScoreApp {
         int note = (int) (Math.random() * 12 + 1);
         System.out.println("Note: " + note);
         int maxTime = 60;
-        int currentTime = 20;
+        int currentTime = 45;
         int restTime;
         switch (note) {
             case 10, 11, 12:
