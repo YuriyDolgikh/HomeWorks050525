@@ -5,22 +5,24 @@ import java.util.Random;
 public class MaximumOfFourNumbersApp {
     public static void main(String[] args) {
         Random random = new Random();
-        int number1 = random.nextInt(100) + 1;
-        int number2 = random.nextInt(100) + 1;
-        int number3 = random.nextInt(100) + 1;
-        int number4 = random.nextInt(100) + 1;
+        int number1 = random.nextInt(101);
+        int number2 = random.nextInt(101);
+        int number3 = random.nextInt(101);
+        int number4 = random.nextInt(101);
         System.out.println("Numbers: " + number1 + " " + number2 + " " + number3 + " " + number4);
 
-        int max;;
-        if (number1 > number2 && number1 > number3 && number1 > number4) {
-            max = number1;
-        } else if (number2 > number1 && number2 > number3 && number2 > number4) {
+        int max = number1;
+
+        if (number2 > max){
             max = number2;
-        } else if (number3 > number1 && number3 > number2 && number3 > number4) {
+        }
+        if (number3 > max){
             max = number3;
-        } else {
+        }
+        if (number4 > max){
             max = number4;
         }
+
         System.out.println("Max: " + max);
     }
 }
