@@ -25,4 +25,8 @@ public class UserInputStatic {
     public static void close(){
         scanner.close();
     }
+
+    public static void skipLineSeparator(){
+        scanner.nextLine();
+    }
 }
