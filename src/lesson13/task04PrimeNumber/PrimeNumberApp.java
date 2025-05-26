@@ -1,20 +1,20 @@
-package lesson13.task04SimpleNumber;
+package lesson13.task04PrimeNumber;
 
 import utils.UserInputStatic;
 
-public class SimpleNumberApp {
+public class PrimeNumberApp {
     public static void main(String[] args) {
         int number = UserInputStatic.inputInt("Input an integer positive number: ");
-        boolean isSimpleNumber = true;
+        boolean isPrimeNumber = true;
         if (number > 3) {
             for (int i = 2; i <= number / 2; i++) {
                 if (number % i == 0) {
-                    isSimpleNumber = false;
+                    isPrimeNumber = false;
                     break;
                 }
             }
         }
-        System.out.println("Number " + number + " is" + (isSimpleNumber ? "" : " not") + " a simple number");
+        System.out.println("Number " + number + " is" + (isPrimeNumber ? "" : " not") + " a prime number");
         UserInputStatic.close();
     }
 
