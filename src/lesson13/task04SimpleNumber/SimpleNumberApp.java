@@ -15,5 +15,7 @@ public class SimpleNumberApp {
             }
         }
         System.out.println("Number " + number + " is" + (isSimpleNumber ? "" : " not") + " a simple number");
+        UserInputStatic.close();
     }
+
 }
