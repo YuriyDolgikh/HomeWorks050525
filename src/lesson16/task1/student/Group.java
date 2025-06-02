@@ -15,16 +15,8 @@ public class Group {
         return groupName;
     }
 
-    public void setGroupName(String groupName) {
-        this.groupName = groupName;
-    }
-
     public Student[] getStudentsForGroup() {
         return studentsForGroup;
-    }
-
-    public void setStudentsForGroup(Student[] studentsForGroup) {
-        this.studentsForGroup = studentsForGroup;
     }
 
     @Override
