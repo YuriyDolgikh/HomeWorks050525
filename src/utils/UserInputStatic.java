@@ -11,15 +11,18 @@ public class UserInputStatic {
         return scanner.nextLine();
     }
 
-
     public static int inputInt(String message){
         System.out.println(message);
-        return scanner.nextInt();
+        int input = scanner.nextInt();
+        scanner.nextLine();
+        return input;
     }
 
     public static double inputDouble(String message){
         System.out.println(message);
-        return scanner.nextDouble();
+        double input = scanner.nextDouble();
+        scanner.nextLine();
+        return input;
     }
 
     public static void close(){
