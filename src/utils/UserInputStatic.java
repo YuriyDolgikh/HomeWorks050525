@@ -29,7 +29,7 @@ public class UserInputStatic {
         scanner.close();
     }
 
-    public static void skipLineSeparator(){
-        scanner.nextLine();
-    }
+//    public static void skipLineSeparator(){
+//        scanner.nextLine();
+//    }
 }

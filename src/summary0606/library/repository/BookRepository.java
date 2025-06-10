@@ -4,7 +4,7 @@ import summary0606.library.config.LibraryConfig;
 import summary0606.library.entity.Book;
 
 public class BookRepository {
-    private Book[] books;
+    private final Book[] books;
     private int lastBookNumber; // индекс последней ячейки в массиве, занятый книгой
 
     public BookRepository() {
@@ -14,10 +14,10 @@ public class BookRepository {
 
     public boolean isBookNameUnique(String name) {
         for (Book book : books) {
-            if (books.length == 0 || book == null) {
+            if (book == null) {
                 return true;
             }
-            if (book.getName().toLowerCase().equals(name.toLowerCase())) {
+            if (book.getName().equalsIgnoreCase(name)) {
                 return false;
             }
         }
@@ -28,9 +28,9 @@ public class BookRepository {
         return lastBookNumber;
     }
 
-    public boolean saveBook(String name, String author) {
+    public boolean saveBook(Book book) {
         if (lastBookNumber < books.length) {
-            books[lastBookNumber++] = new Book(name, author);
+            books[lastBookNumber++] = book;
             return true;
         }
         return false;

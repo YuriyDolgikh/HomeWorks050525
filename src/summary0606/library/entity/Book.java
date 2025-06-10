@@ -2,7 +2,7 @@ package summary0606.library.entity;
 
 public class Book {
     private static int nextId = 1;
-    private int id;
+    private int id;     // Является уникальным и при удалении книги больше не используется
     private String name;
     private String author;
 

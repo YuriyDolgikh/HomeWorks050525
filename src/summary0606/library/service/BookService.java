@@ -35,7 +35,7 @@ public class BookService {
         if (!bookRepository.isBookNameUnique(name)) {
             return 0;
         }
-        if (bookRepository.saveBook(name, author)) {
+        if (bookRepository.saveBook(new Book(name, author))) {
             return bookRepository.getLastBookNumber();
         } else {
             return -1;
