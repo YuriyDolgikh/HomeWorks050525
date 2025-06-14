@@ -1,4 +1,4 @@
-package task02;
+package lesson08.task02;
 
 public class Light {
     private String location;
