@@ -18,14 +18,12 @@ class AverageTest {
     @Test
     void testGetAverageArrayIsEmpty() {
         double[] sourceEmptyArray = {};
-        double result = 215.0;
         assertTrue(Double.isNaN(average.getAverage(sourceEmptyArray)));
     }
 
     @Test
     void testGetAverageArrayIsNull() {
         double[] sourceNull = null;
-        double result = 215.0;
         assertThrows(NullPointerException.class, () -> average.getAverage(sourceNull));
     }
 }
