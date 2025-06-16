@@ -230,11 +230,11 @@ class ProductServiceTest {
 
     @Test
     void testGetCurrentQuantity() {
-        ProductRepository thisProductRepository = new ProductRepository(5);
-        ProductService thisProductService = new ProductService(thisProductRepository);
-        assertEquals(0, thisProductService.getCurrentQuantity());
-        thisProductService.addProduct("num1", "Brand1", "Category1", "Name1", 1000);
-        thisProductService.addProduct("num2", "Brand2", "Category2", "Name2", 2000);
-        assertEquals(2, thisProductService.getCurrentQuantity());
+        ProductRepository testProductRepository = new ProductRepository(5);
+        ProductService testProductService = new ProductService(testProductRepository);
+        assertEquals(0, testProductService.getCurrentQuantity());
+        testProductService.addProduct("num1", "Brand1", "Category1", "Name1", 1000);
+        testProductService.addProduct("num2", "Brand2", "Category2", "Name2", 2000);
+        assertEquals(2, testProductService.getCurrentQuantity());
     }
 }
