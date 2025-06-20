@@ -28,7 +28,7 @@ public class TaskRepository {
         }
         return null;
     }
-
+    // Поиск задач возможен по части имени - так удобнее
     public Task[] findTasksByTitle(String title) {
         Task[] sourceTasks = findAllTasks();
         int taskCounter = 0;
@@ -112,7 +112,7 @@ public class TaskRepository {
                     continue;
                 }
                 if (tasks[i].getTaskPriority() == tasks[j].getTaskPriority()) {
-                    if (tasks[i].getTaskTitle().toLowerCase().compareTo(tasks[j].getTaskTitle()) > 0) {
+                    if (tasks[i].getTaskTitle().compareToIgnoreCase(tasks[j].getTaskTitle()) > 0) {
                         Task temp = tasks[i];
                         tasks[i] = tasks[j];
                         tasks[j] = temp;
