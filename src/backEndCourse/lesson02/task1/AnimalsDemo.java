@@ -17,7 +17,7 @@ public class AnimalsDemo {
 
     private static void printOnlyDogs(Animal[] animals){
         for(Animal animal : animals){
-            if(animal instanceof Dog){
+            if(animal.getType().equals("Dog")){
                 System.out.println(animal);
             }
         }
