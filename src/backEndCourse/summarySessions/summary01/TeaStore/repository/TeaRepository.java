@@ -153,4 +153,24 @@ public class TeaRepository {
         itemCounter--;
         return true;
     }
+
+    public void sortByManufacturersNameAndTypeOfTeaName() {
+        for (int i = 0; i < itemCounter - 1; i++) {
+            for (int j = i + 1; j < itemCounter; j++) {
+                if (teas[i].getManufacturer().getName().compareToIgnoreCase(teas[j].getManufacturer().getName()) > 0) {
+                    Tea temp = teas[i];
+                    teas[i] = teas[j];
+                    teas[j] = temp;
+                    continue;
+                }
+                if (teas[i].getManufacturer().getName().compareToIgnoreCase(teas[j].getManufacturer().getName()) == 0) {
+                    if (teas[i].getType().getTypeName().compareToIgnoreCase(teas[j].getType().getTypeName()) > 0) {
+                        Tea temp = teas[i];
+                        teas[i] = teas[j];
+                        teas[j] = temp;
+                    }
+                }
+            }
+        }
+    }
 }

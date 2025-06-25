@@ -101,4 +101,16 @@ public class TypeOfTeaRepository {
         itemCounter--;
         return true;
     }
+
+    public void sortByName() {
+        for (int i = 0; i < itemCounter - 1; i++) {
+            for (int j = i + 1; j < itemCounter; j++) {
+                if (typeOfTeas[i].getTypeName().compareTo(typeOfTeas[j].getTypeName()) > 0) {
+                    TypeOfTea temp = typeOfTeas[i];
+                    typeOfTeas[i] = typeOfTeas[j];
+                    typeOfTeas[j] = temp;
+                }
+            }
+        }
+    }
 }
