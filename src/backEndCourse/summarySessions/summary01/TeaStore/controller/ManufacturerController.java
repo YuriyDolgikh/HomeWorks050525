@@ -89,7 +89,7 @@ public class ManufacturerController {
 
     public String loadManufacturersIntoDB() {
         ResponseCode response = manufacturerService.loadExampleOfManufacturersIntoDB();
-        return response.equals(ResponseCode.MSG_OK) ? response.getMessage() : response.getMessage() + "\nNot all manufacturers loaded";
+        return response.equals(ResponseCode.MSG_OK) ? response.getMessage() : response.getMessage() + "\nNot all manufacturers are loaded";
     }
 
 }
