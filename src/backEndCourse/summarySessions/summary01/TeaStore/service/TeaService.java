@@ -80,7 +80,6 @@ public class TeaService {
         if(!initCheckStatus.equals(ResponseCode.MSG_OK)){
             return initCheckStatus;
         }
-
         Manufacturer manufacturerAfterUpdate = manufacturerService.getByName(manufacturerName);
         if (manufacturerAfterUpdate == null) {
             return ResponseCode.ERR_NAME_NOT_FOUND;
@@ -101,7 +100,6 @@ public class TeaService {
         if(!initCheckStatus.equals(ResponseCode.MSG_OK)){
             return initCheckStatus;
         }
-
         TypeOfTea typeOfTeaAfterUpdate = typeOfTeaService.getByName(typeOfTeaName);
         if (typeOfTeaAfterUpdate == null) {
             return ResponseCode.ERR_NAME_NOT_FOUND;
@@ -122,7 +120,6 @@ public class TeaService {
         if(!initCheckStatus.equals(ResponseCode.MSG_OK)){
             return initCheckStatus;
         }
-
         Tea newTeaForCheck = new Tea(0, teaToUpdate.getManufacturer(), teaToUpdate.getType(), variety);
         for (Tea item : teaRepository.findByVariety(variety)) {
             if (item.equals(newTeaForCheck)) {
