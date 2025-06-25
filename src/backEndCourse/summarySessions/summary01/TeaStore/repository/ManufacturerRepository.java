@@ -100,4 +100,16 @@ public class ManufacturerRepository {
         itemCounter--;
         return true;
     }
+
+    public void sortByName() {
+        for (int i = 0; i < itemCounter - 1; i++) {
+            for (int j = i + 1; j < itemCounter; j++) {
+                if (manufacturers[i].getName().compareTo(manufacturers[j].getName()) > 0) {
+                    Manufacturer temp = manufacturers[i];
+                    manufacturers[i] = manufacturers[j];
+                    manufacturers[j] = temp;
+                }
+            }
+        }
+    }
 }

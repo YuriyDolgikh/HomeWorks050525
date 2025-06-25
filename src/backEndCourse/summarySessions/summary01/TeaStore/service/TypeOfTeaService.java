@@ -1,6 +1,7 @@
 package backEndCourse.summarySessions.summary01.TeaStore.service;
 
-import backEndCourse.summarySessions.summary01.TeaStore.config.StatusCode;
+import backEndCourse.summarySessions.summary01.TeaStore.config.InitDataBase;
+import backEndCourse.summarySessions.summary01.TeaStore.config.ResponseCode;
 import backEndCourse.summarySessions.summary01.TeaStore.entity.TypeOfTea;
 import backEndCourse.summarySessions.summary01.TeaStore.repository.TypeOfTeaRepository;
 
@@ -14,24 +15,24 @@ public class TypeOfTeaService {
         this.teaService = teaService;
     }
 
-    public int add(int id, String name, String comment) {
+    public ResponseCode add(int id, String name, String comment) {
 
         if (typeOfTeaRepository.findById(id) != null) {
-            return StatusCode.ERR_ID_ALREADY_EXIST;
+            return ResponseCode.ERR_ID_ALREADY_EXIST;
         }
         if (typeOfTeaRepository.findByTypeName(name) != null) {
-            return StatusCode.ERR_NAME_ALREADY_EXIST;
+            return ResponseCode.ERR_NAME_ALREADY_EXIST;
         }
         if (name == null || comment == null) {
-            return StatusCode.ERR_IS_NULL;
+            return ResponseCode.ERR_IS_NULL;
         }
         if (name.isBlank() || comment.isBlank()) {
-            return StatusCode.ERR_IS_BLANC;
+            return ResponseCode.ERR_IS_BLANC;
         }
         if (typeOfTeaRepository.add(new TypeOfTea(id, name, comment))) {
-            return StatusCode.MSG_OK;
+            return ResponseCode.MSG_OK;
         }else {
-            return StatusCode.ERR_NO_FREE_SPACE;
+            return ResponseCode.ERR_NO_FREE_SPACE;
         }
     }
 
@@ -51,49 +52,67 @@ public class TypeOfTeaService {
         return typeOfTeaRepository.findByPartOfComment(textToFind);
     }
 
-    public int updateTypeNameByID(int id, String name) {
+    public ResponseCode updateTypeNameByID(int id, String name) {
         if (name == null) {
-            return StatusCode.ERR_IS_NULL;
+            return ResponseCode.ERR_IS_NULL;
         }
         if (name.isBlank()) {
-            return StatusCode.ERR_IS_BLANC;
+            return ResponseCode.ERR_IS_BLANC;
         }
         if (typeOfTeaRepository.findById(id) == null) {
-            return StatusCode.ERR_ID_NOT_FOUND;
+            return ResponseCode.ERR_ID_NOT_FOUND;
         }
         if (typeOfTeaRepository.findByTypeName(name) != null) {
-            return StatusCode.ERR_NAME_ALREADY_EXIST;
+            return ResponseCode.ERR_NAME_ALREADY_EXIST;
         }
         typeOfTeaRepository.updateTypeNameById(id, name);
-        return StatusCode.MSG_OK;
+        return ResponseCode.MSG_OK;
     }
 
-    public int updateCommentByID(int id, String comment) {
+    public ResponseCode updateCommentByID(int id, String comment) {
         if (comment == null) {
-            return StatusCode.ERR_IS_NULL;
+            return ResponseCode.ERR_IS_NULL;
         }
         if (comment.isBlank()) {
-            return StatusCode.ERR_IS_BLANC;
+            return ResponseCode.ERR_IS_BLANC;
         }
         if (typeOfTeaRepository.findById(id) == null) {
-            return StatusCode.ERR_ID_NOT_FOUND;
+            return ResponseCode.ERR_ID_NOT_FOUND;
         }
         typeOfTeaRepository.updateCommentById(id, comment);
-        return StatusCode.MSG_OK;
+        return ResponseCode.MSG_OK;
     }
 
-    public int deleteById(int id) {
+    public ResponseCode deleteById(int id) {
         TypeOfTea itemToDelete = typeOfTeaRepository.findById(id);
         if (itemToDelete == null) {
-            return StatusCode.ERR_ID_NOT_FOUND;
+            return ResponseCode.ERR_ID_NOT_FOUND;
         }
         if (teaService.getByTypeName(itemToDelete.getTypeName()).length != 0) {
-            return StatusCode.ERR_LINK_TO_OBJECT_EXIST_IN_ANOTHER_DB;
+            return ResponseCode.ERR_LINK_TO_OBJECT_EXIST_IN_ANOTHER_DB;
         }
         typeOfTeaRepository.deleteById(id);
-        return StatusCode.MSG_OK;
+        return ResponseCode.MSG_OK;
     }
 
+    public ResponseCode sortTypOfTeaByName() {
+        if (typeOfTeaRepository.findAll().length == 0){
+            return ResponseCode.ERR_DB_IS_EMPTY;
+        }
+        typeOfTeaRepository.sortByName();
+        return ResponseCode.MSG_OK;
+    }
+
+    public ResponseCode loadExampleOfTypeOfTeasIntoDB() {
+        ResponseCode response = ResponseCode.MSG_OK;
+        for (TypeOfTea typeOfTea : InitDataBase.getsimpleTypeOfTea()){
+            ResponseCode responseCode = add(typeOfTea.getId(), typeOfTea.getTypeName(), typeOfTea.getComment());
+            if (!responseCode.equals(ResponseCode.MSG_OK)) {
+                response = ResponseCode.ERR_SOMETHING_WENT_WRONG;
+            }
+        }
+        return response;
+    }
 
 
 }

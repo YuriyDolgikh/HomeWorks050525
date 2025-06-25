@@ -1,6 +1,7 @@
 package backEndCourse.summarySessions.summary01.TeaStore.service;
 
-import backEndCourse.summarySessions.summary01.TeaStore.config.StatusCode;
+import backEndCourse.summarySessions.summary01.TeaStore.config.InitDataBase;
+import backEndCourse.summarySessions.summary01.TeaStore.config.ResponseCode;
 import backEndCourse.summarySessions.summary01.TeaStore.entity.Manufacturer;
 import backEndCourse.summarySessions.summary01.TeaStore.repository.ManufacturerRepository;
 
@@ -13,24 +14,24 @@ public class ManufacturerService {
         this.teaService = teaService;
     }
 
-    public int add(int id, String name, String comment) {
+    public ResponseCode add(int id, String name, String comment) {
 
         if (manufacturerRepository.findById(id) != null) {
-            return StatusCode.ERR_ID_ALREADY_EXIST;
+            return ResponseCode.ERR_ID_ALREADY_EXIST;
         }
         if (manufacturerRepository.findByName(name) != null) {
-            return StatusCode.ERR_NAME_ALREADY_EXIST;
+            return ResponseCode.ERR_NAME_ALREADY_EXIST;
         }
         if (name == null || comment == null) {
-            return StatusCode.ERR_IS_NULL;
+            return ResponseCode.ERR_IS_NULL;
         }
         if (name.isBlank() || comment.isBlank()) {
-            return StatusCode.ERR_IS_BLANC;
+            return ResponseCode.ERR_IS_BLANC;
         }
         if (manufacturerRepository.add(new Manufacturer(id, name, comment))) {
-            return StatusCode.MSG_OK;
+            return ResponseCode.MSG_OK;
         }else {
-            return StatusCode.ERR_NO_FREE_SPACE;
+            return ResponseCode.ERR_NO_FREE_SPACE;
         }
     }
 
@@ -50,49 +51,65 @@ public class ManufacturerService {
         return manufacturerRepository.findByPartOfComment(textToFind);
     }
 
-    public int updateNameByID(int id, String name) {
+    public ResponseCode updateNameByID(int id, String name) {
         if (name == null) {
-            return StatusCode.ERR_IS_NULL;
+            return ResponseCode.ERR_IS_NULL;
         }
         if (name.isBlank()) {
-            return StatusCode.ERR_IS_BLANC;
+            return ResponseCode.ERR_IS_BLANC;
         }
         if (manufacturerRepository.findById(id) == null) {
-            return StatusCode.ERR_ID_NOT_FOUND;
+            return ResponseCode.ERR_ID_NOT_FOUND;
         }
         if (manufacturerRepository.findByName(name) != null) {
-            return StatusCode.ERR_NAME_ALREADY_EXIST;
+            return ResponseCode.ERR_NAME_ALREADY_EXIST;
         }
         manufacturerRepository.updateNameById(id, name);
-        return StatusCode.MSG_OK;
+        return ResponseCode.MSG_OK;
     }
 
-    public int updateCommentByID(int id, String comment) {
+    public ResponseCode updateCommentByID(int id, String comment) {
         if (comment == null) {
-            return StatusCode.ERR_IS_NULL;
+            return ResponseCode.ERR_IS_NULL;
         }
         if (comment.isBlank()) {
-            return StatusCode.ERR_IS_BLANC;
+            return ResponseCode.ERR_IS_BLANC;
         }
         if (manufacturerRepository.findById(id) == null) {
-            return StatusCode.ERR_ID_NOT_FOUND;
+            return ResponseCode.ERR_ID_NOT_FOUND;
         }
         manufacturerRepository.updateCommentById(id, comment);
-        return StatusCode.MSG_OK;
+        return ResponseCode.MSG_OK;
     }
 
-    public int deleteById(int id) {
+    public ResponseCode deleteById(int id) {
         Manufacturer itemToDelete = manufacturerRepository.findById(id);
         if (itemToDelete == null) {
-            return StatusCode.ERR_ID_NOT_FOUND;
+            return ResponseCode.ERR_ID_NOT_FOUND;
         }
         if (teaService.getByManufacturerName(itemToDelete.getName()).length != 0) {
-            return StatusCode.ERR_LINK_TO_OBJECT_EXIST_IN_ANOTHER_DB;
+            return ResponseCode.ERR_LINK_TO_OBJECT_EXIST_IN_ANOTHER_DB;
         }
         manufacturerRepository.deleteById(id);
-        return StatusCode.MSG_OK;
+        return ResponseCode.MSG_OK;
     }
 
+    public ResponseCode sortManufacturersByName() {
+        if (manufacturerRepository.findAll().length == 0){
+            return ResponseCode.ERR_DB_IS_EMPTY;
+        }
+        manufacturerRepository.sortByName();
+        return ResponseCode.MSG_OK;
+    }
 
-
+    public ResponseCode loadExampleOfManufacturersIntoDB() {
+        ResponseCode response = ResponseCode.MSG_OK;
+        for (Manufacturer manufacturer : InitDataBase.getSimpleManufacturers()){
+            ResponseCode responseCode = add(manufacturer.getId(), manufacturer.getName(), manufacturer.getComment());
+            if (!responseCode.equals(ResponseCode.MSG_OK)) {
+                response = ResponseCode.ERR_SOMETHING_WENT_WRONG;
+            }
+        }
+        return response;
+    }
 }
