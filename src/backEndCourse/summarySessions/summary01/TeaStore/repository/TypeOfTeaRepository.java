@@ -14,7 +14,7 @@ public class TypeOfTeaRepository {
     }
 
     public boolean add(TypeOfTea typeOfTea) {
-        if(itemCounter < typeOfTeas.length) {
+        if (itemCounter < typeOfTeas.length) {
             typeOfTeas[itemCounter++] = typeOfTea;
             return true;
         }
@@ -26,8 +26,8 @@ public class TypeOfTeaRepository {
     }
 
     public TypeOfTea findById(int id) {
-        for(TypeOfTea typeOfTea : findAll()) {
-            if(typeOfTea.getId() == id) {
+        for (TypeOfTea typeOfTea : findAll()) {
+            if (typeOfTea.getId() == id) {
                 return typeOfTea;
             }
         }
@@ -35,8 +35,8 @@ public class TypeOfTeaRepository {
     }
 
     public TypeOfTea findByTypeName(String name) {
-        for(TypeOfTea typeOfTea : findAll()) {
-            if(typeOfTea.getTypeName().equalsIgnoreCase(name)) {
+        for (TypeOfTea typeOfTea : findAll()) {
+            if (typeOfTea.getTypeName().equalsIgnoreCase(name)) {
                 return typeOfTea;
             }
         }
@@ -45,15 +45,15 @@ public class TypeOfTeaRepository {
 
     public TypeOfTea[] findByPartOfComment(String textToFind) {
         int counter = 0;
-        for(TypeOfTea typeOfTea : findAll()) {
+        for (TypeOfTea typeOfTea : findAll()) {
             if (typeOfTea.getComment().toLowerCase().contains(textToFind.toLowerCase())) {
                 counter++;
             }
         }
         TypeOfTea[] typeOfTeas = new TypeOfTea[counter];
         int index = 0;
-        for(TypeOfTea typeOfTea : findAll()) {
-            if(typeOfTea.getComment().toLowerCase().contains(textToFind.toLowerCase())) {
+        for (TypeOfTea typeOfTea : findAll()) {
+            if (typeOfTea.getComment().toLowerCase().contains(textToFind.toLowerCase())) {
                 typeOfTeas[index++] = typeOfTea;
             }
         }
@@ -62,7 +62,7 @@ public class TypeOfTeaRepository {
 
     public boolean updateTypeNameById(int id, String name) {
         TypeOfTea itemToUpdate = findById(id);
-        if(itemToUpdate == null || findByTypeName(name) != null) {
+        if (itemToUpdate == null || findByTypeName(name) != null) {
             return false;
         }
         itemToUpdate.setTypeName(name);
@@ -71,7 +71,7 @@ public class TypeOfTeaRepository {
 
     public boolean updateCommentById(int id, String comment) {
         TypeOfTea itemToUpdate = findById(id);
-        if(itemToUpdate == null) {
+        if (itemToUpdate == null) {
             return false;
         }
         itemToUpdate.setComment(comment);
@@ -89,15 +89,15 @@ public class TypeOfTeaRepository {
         if (indexToDelete == -1) {
             return false;
         }
-        if (itemCounter == 1){
+        if (itemCounter == 1) {
             typeOfTeas[0] = null;
             itemCounter = 0;
         }
 
         for (int i = indexToDelete + 1; i < itemCounter; i++) {
-            typeOfTeas[i-1] = typeOfTeas[i];
+            typeOfTeas[i - 1] = typeOfTeas[i];
         }
-        typeOfTeas[itemCounter-1] = null;
+        typeOfTeas[itemCounter - 1] = null;
         itemCounter--;
         return true;
     }

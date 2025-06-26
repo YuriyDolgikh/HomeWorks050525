@@ -36,7 +36,7 @@ public class TypeOfTeaService implements TypeOfTeaServiceInterface {
         }
         if (typeOfTeaRepository.add(new TypeOfTea(id, name, comment))) {
             return ResponseCode.MSG_OK;
-        }else {
+        } else {
             return ResponseCode.ERR_NO_FREE_SPACE;
         }
     }
@@ -109,7 +109,7 @@ public class TypeOfTeaService implements TypeOfTeaServiceInterface {
 
     @Override
     public ResponseCode sortTypOfTeaByName() {
-        if (typeOfTeaRepository.findAll().length == 0){
+        if (typeOfTeaRepository.findAll().length == 0) {
             return ResponseCode.ERR_DB_IS_EMPTY;
         }
         typeOfTeaRepository.sortByName();
@@ -119,7 +119,7 @@ public class TypeOfTeaService implements TypeOfTeaServiceInterface {
     @Override
     public ResponseCode loadExampleOfTypeOfTeasIntoDB() {
         ResponseCode response = ResponseCode.MSG_OK;
-        for (TypeOfTea typeOfTea : ExampleData.getSimpleTypeOfTea()){
+        for (TypeOfTea typeOfTea : ExampleData.getSimpleTypeOfTea()) {
             ResponseCode responseCode = add(typeOfTea.getId(), typeOfTea.getTypeName(), typeOfTea.getComment());
             if (!responseCode.equals(ResponseCode.MSG_OK)) {
                 response = ResponseCode.ERR_SOMETHING_WENT_WRONG;

@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class Manufacturer {
 
-    private int id;
+    private final int id;
     private String name;
     private String comment;
 
@@ -22,12 +22,12 @@ public class Manufacturer {
         return name;
     }
 
-    public String getComment() {
-        return comment;
-    }
-
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getComment() {
+        return comment;
     }
 
     public void setComment(String comment) {

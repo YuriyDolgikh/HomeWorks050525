@@ -1,10 +1,9 @@
 package backEndCourse.summarySessions.summary01.TeaStore.entity;
 
-
 import java.util.Objects;
 
 public class Tea {
-    private int id;
+    private final int id;
     private Manufacturer manufacturer;
     private TypeOfTea type;
     private String variety;
@@ -24,20 +23,20 @@ public class Tea {
         return manufacturer;
     }
 
-    public TypeOfTea getType() {
-        return type;
-    }
-
-    public String getVariety() {
-        return variety;
-    }
-
     public void setManufacturer(Manufacturer manufacturer) {
         this.manufacturer = manufacturer;
     }
 
+    public TypeOfTea getType() {
+        return type;
+    }
+
     public void setType(TypeOfTea type) {
         this.type = type;
+    }
+
+    public String getVariety() {
+        return variety;
     }
 
     public void setVariety(String variety) {
@@ -53,5 +52,15 @@ public class Tea {
     @Override
     public int hashCode() {
         return Objects.hash(manufacturer, type, variety);
+    }
+
+    @Override
+    public String toString() {
+        return "Tea{" +
+                "id=" + id +
+                ", manufacturer=" + manufacturer +
+                ", type=" + type +
+                ", variety='" + variety + '\'' +
+                '}';
     }
 }

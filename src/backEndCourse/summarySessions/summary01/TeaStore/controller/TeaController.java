@@ -20,10 +20,10 @@ public class TeaController {
         return teaService.add(id, manufacturerId, typeOfTeaId, variety).getMessage();
     }
 
-    public  String getAllTeas() {
+    public String getAllTeas() {
         StringBuilder sb = new StringBuilder("Teas list:").append(System.lineSeparator());
         Tea[] teas = teaService.getAll();
-        if(teas.length == 0) {
+        if (teas.length == 0) {
             sb.append(ResponseCode.ERR_DB_IS_EMPTY);
         } else {
             for (Tea tea : teas) {
@@ -36,7 +36,7 @@ public class TeaController {
     public String getTeaById() {
         int id = UserInputStatic.inputInt("Please enter the tea id: ");
         Tea tea = teaService.getById(id);
-        if(tea == null) {
+        if (tea == null) {
             return ResponseCode.ERR_ID_NOT_FOUND.getMessage();
         }
         return tea.toString();
@@ -46,7 +46,7 @@ public class TeaController {
         String name = UserInputStatic.inputText("Please enter the manufacturer name: ");
         StringBuilder sb = new StringBuilder("Teas by manufacturer list:").append(System.lineSeparator());
         Tea[] teas = teaService.getByManufacturerName(name);
-        if(teas.length == 0) {
+        if (teas.length == 0) {
             sb.append(ResponseCode.ERR_NO_RECORDS_FOUND);
         } else {
             for (Tea tea : teas) {
@@ -60,7 +60,7 @@ public class TeaController {
         String typeName = UserInputStatic.inputText("Please enter the type of tea: ");
         StringBuilder sb = new StringBuilder("Teas by type list:").append(System.lineSeparator());
         Tea[] teas = teaService.getByTypeName(typeName);
-        if(teas.length == 0) {
+        if (teas.length == 0) {
             sb.append(ResponseCode.ERR_NO_RECORDS_FOUND);
         } else {
             for (Tea tea : teas) {
@@ -74,7 +74,7 @@ public class TeaController {
         String textToFind = UserInputStatic.inputText("Please enter the variety: ");
         StringBuilder sb = new StringBuilder("Teas by variety list:").append(System.lineSeparator());
         Tea[] teas = teaService.getByVariety(textToFind);
-        if(teas.length == 0) {
+        if (teas.length == 0) {
             sb.append(ResponseCode.ERR_NO_RECORDS_FOUND);
         } else {
             for (Tea tea : teas) {
@@ -88,8 +88,8 @@ public class TeaController {
         String name = UserInputStatic.inputText("Please enter the manufacturer name: ");
         String typeName = UserInputStatic.inputText("Please enter the type of tea: ");
         StringBuilder sb = new StringBuilder("Teas by manufacturer and type list:").append(System.lineSeparator());
-        Tea[] teas = teaService.getByManufacturerAndTypeOfTea(name,  typeName);
-        if(teas.length == 0) {
+        Tea[] teas = teaService.getByManufacturerAndTypeOfTea(name, typeName);
+        if (teas.length == 0) {
             sb.append(ResponseCode.ERR_NO_RECORDS_FOUND);
         } else {
             for (Tea tea : teas) {
@@ -132,5 +132,4 @@ public class TeaController {
         ResponseCode response = teaService.loadExampleOfTeasIntoDB();
         return response.equals(ResponseCode.MSG_OK) ? response.getMessage() : response.getMessage() + "\nNot all teas are loaded";
     }
-
 }

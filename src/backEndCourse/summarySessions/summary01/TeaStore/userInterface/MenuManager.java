@@ -18,30 +18,94 @@ public class MenuManager {
         this.typeOfTeaController = typeOfTeaController;
     }
 
-    public void mainMenu(){
-        boolean isMainMenuActive = true;
+    public void mainMenu() {
+        boolean isMainMenuAlive = true;
         String command;
-        while (isMainMenuActive){
+        while (isMainMenuAlive) {
             showMainMenu();
             command = UserInputStatic.inputText("Enter the command:").toUpperCase();
-            switch (command){
-//                case "1" -> showTeaMenu();
-//                case "2" -> showManufacturerMenu();
-//                case "3" -> showTypeOfTeaMenu();
-                case "X" -> isMainMenuActive = false;
+            switch (command) {
+                case "1" -> teaMenu();
+                case "2" -> manufacturerMenu();
+                case "3" -> typeOfTeaMenu();
+                case "X" -> isMainMenuAlive = false;
                 default -> printWrongCommand();
             }
         }
     }
 
+    public void teaMenu() {
+        boolean isTeaMenuAlive = true;
+        String command;
+        while (isTeaMenuAlive) {
+            showTeaMenu();
+            command = UserInputStatic.inputText("Enter the command:").toUpperCase();
+            switch (command) {
+                case "A" -> System.out.println(teaController.addTea());
+                case "1" -> System.out.println(teaController.getAllTeas());
+                case "2" -> System.out.println(teaController.getTeaById());
+                case "3" -> System.out.println(teaController.getTeasByManufacturerName());
+                case "4" -> System.out.println(teaController.getTeasByTypeName());
+                case "5" -> System.out.println(teaController.getTeaByVariety());
+                case "6" -> System.out.println(teaController.getTeasByManufacturerAndTypeOfTea());
+                case "7" -> System.out.println(teaController.updateManufacturerById());
+                case "8" -> System.out.println(teaController.updateTypeOfTeaById());
+                case "9" -> System.out.println(teaController.updateVarietyById());
+                case "D" -> System.out.println(teaController.deleteTeaById());
+                case "S" -> System.out.println(teaController.sortTea());
+                case "L" -> System.out.println(teaController.loadTeaIntoDB());
+                case "X" -> isTeaMenuAlive = false;
+                default -> printWrongCommand();
+            }
+        }
+    }
 
+    public void manufacturerMenu() {
+        boolean isManufacturerMenuAlive = true;
+        String command;
+        while (isManufacturerMenuAlive) {
+            showManufacturerMenu();
+            command = UserInputStatic.inputText("Enter the command:").toUpperCase();
+            switch (command) {
+                case "A" -> System.out.println(manufacturerController.addManufacturer());
+                case "1" -> System.out.println(manufacturerController.getAllManufacturers());
+                case "2" -> System.out.println(manufacturerController.getManufacturerById());
+                case "3" -> System.out.println(manufacturerController.getManufacturerByName());
+                case "4" -> System.out.println(manufacturerController.getManufacturerByPartOfComment());
+                case "5" -> System.out.println(manufacturerController.updateManufacturerNameById());
+                case "6" -> System.out.println(manufacturerController.updateManufacturerCommentById());
+                case "D" -> System.out.println(manufacturerController.deleteManufacturerById());
+                case "S" -> System.out.println(manufacturerController.sortManufacturersByName());
+                case "L" -> System.out.println(manufacturerController.loadManufacturersIntoDB());
+                case "X" -> isManufacturerMenuAlive = false;
+                default -> printWrongCommand();
 
+            }
+        }
+    }
 
-
-
-
-
-
+    public void typeOfTeaMenu() {
+        boolean isTypeOfTeaMenuAlive = true;
+        String command;
+        while (isTypeOfTeaMenuAlive) {
+            showTypeOfTeaMenu();
+            command = UserInputStatic.inputText("Enter the command:").toUpperCase();
+            switch (command) {
+                case "A" -> System.out.println(typeOfTeaController.addTypeOfTea());
+                case "1" -> System.out.println(typeOfTeaController.getAllTypeOfTea());
+                case "2" -> System.out.println(typeOfTeaController.getTypeOfTeaById());
+                case "3" -> System.out.println(typeOfTeaController.getTypeOfTeasByName());
+                case "4" -> System.out.println(typeOfTeaController.getTypeOfTeaByPartOfComment());
+                case "5" -> System.out.println(typeOfTeaController.updateTypeOfTeaNameById());
+                case "6" -> System.out.println(typeOfTeaController.updateTypeOfTeaCommentById());
+                case "D" -> System.out.println(typeOfTeaController.deleteTypeOfTeaById());
+                case "S" -> System.out.println(typeOfTeaController.sortTypeOfTeasByName());
+                case "L" -> System.out.println(typeOfTeaController.loadTypeOfTeasIntoDB());
+                case "X" -> isTypeOfTeaMenuAlive = false;
+                default -> printWrongCommand();
+            }
+        }
+    }
 
     private void showMainMenu() {
         System.out.println("--------------------");
@@ -55,6 +119,7 @@ public class MenuManager {
     }
 
     private void showTeaMenu() {
+        System.out.println("-----------------------------------");
         System.out.println("   Tea menu");
         System.out.println("-----------------------------------");
         System.out.println("A. Add tea");
@@ -75,6 +140,7 @@ public class MenuManager {
     }
 
     private void showManufacturerMenu() {
+        System.out.println("-------------------------------");
         System.out.println("   Manufacturer menu");
         System.out.println("-------------------------------");
         System.out.println("A. Add manufacturer");
@@ -92,6 +158,7 @@ public class MenuManager {
     }
 
     private void showTypeOfTeaMenu() {
+        System.out.println("------------------------------");
         System.out.println("   Type of tea menu");
         System.out.println("------------------------------");
         System.out.println("A. Add type");
@@ -109,7 +176,6 @@ public class MenuManager {
     }
 
     private void printWrongCommand() {
-        System.out.println("Wrong command");
+        System.err.println("Wrong command");
     }
-
 }

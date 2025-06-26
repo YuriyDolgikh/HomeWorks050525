@@ -54,6 +54,7 @@ public class TeaService implements TeaServiceInterface {
             return ResponseCode.ERR_NO_FREE_SPACE;
         }
     }
+
     @Override
     public Tea[] getAll() {
         return teaRepository.findAll();
@@ -92,7 +93,7 @@ public class TeaService implements TeaServiceInterface {
     public ResponseCode updateManufacturerById(int id, String manufacturerName) {
         Tea teaToUpdate = teaRepository.findById(id);
         ResponseCode initCheckStatus = initialCheckTeaBeforeUpdate(teaToUpdate, manufacturerName);
-        if(!initCheckStatus.equals(ResponseCode.MSG_OK)){
+        if (!initCheckStatus.equals(ResponseCode.MSG_OK)) {
             return initCheckStatus;
         }
         Manufacturer manufacturerAfterUpdate = manufacturerService.getByName(manufacturerName);
@@ -113,7 +114,7 @@ public class TeaService implements TeaServiceInterface {
     public ResponseCode updateTypeOfTeaById(int id, String typeOfTeaName) {
         Tea teaToUpdate = teaRepository.findById(id);
         ResponseCode initCheckStatus = initialCheckTeaBeforeUpdate(teaToUpdate, typeOfTeaName);
-        if(!initCheckStatus.equals(ResponseCode.MSG_OK)){
+        if (!initCheckStatus.equals(ResponseCode.MSG_OK)) {
             return initCheckStatus;
         }
         TypeOfTea typeOfTeaAfterUpdate = typeOfTeaService.getByName(typeOfTeaName);
@@ -134,7 +135,7 @@ public class TeaService implements TeaServiceInterface {
     public ResponseCode updateVarietyById(int id, String variety) {
         Tea teaToUpdate = teaRepository.findById(id);
         ResponseCode initCheckStatus = initialCheckTeaBeforeUpdate(teaToUpdate, variety);
-        if(!initCheckStatus.equals(ResponseCode.MSG_OK)){
+        if (!initCheckStatus.equals(ResponseCode.MSG_OK)) {
             return initCheckStatus;
         }
         Tea newTeaForCheck = new Tea(0, teaToUpdate.getManufacturer(), teaToUpdate.getType(), variety);
@@ -165,7 +166,7 @@ public class TeaService implements TeaServiceInterface {
 
     @Override
     public ResponseCode sortTeasByManufacturersNameAndTeasName() {
-        if (teaRepository.findAll().length == 0){
+        if (teaRepository.findAll().length == 0) {
             return ResponseCode.ERR_DB_IS_EMPTY;
         }
         teaRepository.sortByManufacturersNameAndTypeOfTeaName();
@@ -175,7 +176,7 @@ public class TeaService implements TeaServiceInterface {
     @Override
     public ResponseCode loadExampleOfTeasIntoDB() {
         ResponseCode response = ResponseCode.MSG_OK;
-        for (Tea tea : ExampleData.getSimpleTea()){
+        for (Tea tea : ExampleData.getSimpleTea()) {
             ResponseCode responseCode = add(tea.getId(), tea.getManufacturer().getId(), tea.getType().getId(), tea.getVariety());
             if (!responseCode.equals(ResponseCode.MSG_OK)) {
                 response = ResponseCode.ERR_SOMETHING_WENT_WRONG;
@@ -184,7 +185,7 @@ public class TeaService implements TeaServiceInterface {
         return response;
     }
 
-    private ResponseCode initialCheckTeaBeforeUpdate(Tea teaToUpdate, String parameterToUpdate){
+    private ResponseCode initialCheckTeaBeforeUpdate(Tea teaToUpdate, String parameterToUpdate) {
         if (teaToUpdate == null) {
             return ResponseCode.ERR_ID_NOT_FOUND;
         }

@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class TypeOfTea {
 
-    private int id;
+    private final int id;
     private String typeName;
     private String comment;
 
@@ -22,12 +22,12 @@ public class TypeOfTea {
         return typeName;
     }
 
-    public String getComment() {
-        return comment;
-    }
-
     public void setTypeName(String typeName) {
         this.typeName = typeName;
+    }
+
+    public String getComment() {
+        return comment;
     }
 
     public void setComment(String comment) {
