@@ -1,23 +1,32 @@
 package backEndCourse.summarySessions.summary01.TeaStore.service;
 
-import backEndCourse.summarySessions.summary01.TeaStore.config.InitDataBase;
+import backEndCourse.summarySessions.summary01.TeaStore.config.ExampleData;
 import backEndCourse.summarySessions.summary01.TeaStore.config.ResponseCode;
 import backEndCourse.summarySessions.summary01.TeaStore.entity.Manufacturer;
 import backEndCourse.summarySessions.summary01.TeaStore.entity.Tea;
 import backEndCourse.summarySessions.summary01.TeaStore.entity.TypeOfTea;
 import backEndCourse.summarySessions.summary01.TeaStore.repository.TeaRepository;
 
-public class TeaService {
+public class TeaService implements TeaServiceInterface {
     private final TeaRepository teaRepository;
-    private final TypeOfTeaService typeOfTeaService;
-    private final ManufacturerService manufacturerService;
+    private TypeOfTeaServiceInterface typeOfTeaService;
+    private ManufacturerServiceInterface manufacturerService;
 
-    public TeaService(TeaRepository teaRepository, TypeOfTeaService typeOfTeaService, ManufacturerService manufacturerService) {
+    public TeaService(TeaRepository teaRepository) {
         this.teaRepository = teaRepository;
+    }
+
+    @Override
+    public void setTypeOfTeaService(TypeOfTeaServiceInterface typeOfTeaService) {
         this.typeOfTeaService = typeOfTeaService;
+    }
+
+    @Override
+    public void setManufacturerService(ManufacturerServiceInterface manufacturerService) {
         this.manufacturerService = manufacturerService;
     }
 
+    @Override
     public ResponseCode add(int id, int manufacturerId, int typeOfTeaId, String variety) {
         if (teaRepository.findById(id) != null) {
             return ResponseCode.ERR_ID_ALREADY_EXIST;
@@ -45,27 +54,32 @@ public class TeaService {
             return ResponseCode.ERR_NO_FREE_SPACE;
         }
     }
-
+    @Override
     public Tea[] getAll() {
         return teaRepository.findAll();
     }
 
+    @Override
     public Tea getById(int id) {
         return teaRepository.findById(id);
     }
 
+    @Override
     public Tea[] getByManufacturerName(String name) {
         return teaRepository.findByManufacturer(manufacturerService.getByName(name));
     }
 
+    @Override
     public Tea[] getByTypeName(String name) {
         return teaRepository.findByTypeOfTea(typeOfTeaService.getByName(name));
     }
 
+    @Override
     public Tea[] getByVariety(String textToFind) {
         return teaRepository.findByVariety(textToFind);
     }
 
+    @Override
     public Tea[] getByManufacturerAndTypeOfTea(String manufacturerName, String typeOfTeaName) {
         if (manufacturerName == null || typeOfTeaName == null || manufacturerName.isBlank() || typeOfTeaName.isBlank()) {
             return null;
@@ -74,6 +88,7 @@ public class TeaService {
                 typeOfTeaService.getByName(typeOfTeaName));
     }
 
+    @Override
     public ResponseCode updateManufacturerById(int id, String manufacturerName) {
         Tea teaToUpdate = teaRepository.findById(id);
         ResponseCode initCheckStatus = initialCheckTeaBeforeUpdate(teaToUpdate, manufacturerName);
@@ -94,6 +109,7 @@ public class TeaService {
         return ResponseCode.MSG_OK;
     }
 
+    @Override
     public ResponseCode updateTypeOfTeaById(int id, String typeOfTeaName) {
         Tea teaToUpdate = teaRepository.findById(id);
         ResponseCode initCheckStatus = initialCheckTeaBeforeUpdate(teaToUpdate, typeOfTeaName);
@@ -114,6 +130,7 @@ public class TeaService {
         return ResponseCode.MSG_OK;
     }
 
+    @Override
     public ResponseCode updateVarietyById(int id, String variety) {
         Tea teaToUpdate = teaRepository.findById(id);
         ResponseCode initCheckStatus = initialCheckTeaBeforeUpdate(teaToUpdate, variety);
@@ -130,6 +147,7 @@ public class TeaService {
         return ResponseCode.MSG_OK;
     }
 
+    @Override
     public ResponseCode deleteById(int id) {
         Tea teaToUpdate = teaRepository.findById(id);
         if (teaToUpdate == null) {
@@ -145,6 +163,7 @@ public class TeaService {
         }
     }
 
+    @Override
     public ResponseCode sortTeasByManufacturersNameAndTeasName() {
         if (teaRepository.findAll().length == 0){
             return ResponseCode.ERR_DB_IS_EMPTY;
@@ -153,9 +172,10 @@ public class TeaService {
         return ResponseCode.MSG_OK;
     }
 
+    @Override
     public ResponseCode loadExampleOfTeasIntoDB() {
         ResponseCode response = ResponseCode.MSG_OK;
-        for (Tea tea : InitDataBase.getsimpleTea()){
+        for (Tea tea : ExampleData.getSimpleTea()){
             ResponseCode responseCode = add(tea.getId(), tea.getManufacturer().getId(), tea.getType().getId(), tea.getVariety());
             if (!responseCode.equals(ResponseCode.MSG_OK)) {
                 response = ResponseCode.ERR_SOMETHING_WENT_WRONG;

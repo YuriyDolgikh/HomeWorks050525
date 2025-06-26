@@ -1,20 +1,25 @@
 package backEndCourse.summarySessions.summary01.TeaStore.service;
 
-import backEndCourse.summarySessions.summary01.TeaStore.config.InitDataBase;
+import backEndCourse.summarySessions.summary01.TeaStore.config.ExampleData;
 import backEndCourse.summarySessions.summary01.TeaStore.config.ResponseCode;
 import backEndCourse.summarySessions.summary01.TeaStore.entity.TypeOfTea;
 import backEndCourse.summarySessions.summary01.TeaStore.repository.TypeOfTeaRepository;
 
-public class TypeOfTeaService {
+public class TypeOfTeaService implements TypeOfTeaServiceInterface {
 
     private final TypeOfTeaRepository typeOfTeaRepository;
-    private final TeaService teaService;
+    private TeaServiceInterface teaService;
 
-    public TypeOfTeaService(TypeOfTeaRepository typeOfTeaRepository, TeaService teaService) {
+    public TypeOfTeaService(TypeOfTeaRepository typeOfTeaRepository) {
         this.typeOfTeaRepository = typeOfTeaRepository;
+    }
+
+    @Override
+    public void setTeaService(TeaServiceInterface teaService) {
         this.teaService = teaService;
     }
 
+    @Override
     public ResponseCode add(int id, String name, String comment) {
 
         if (typeOfTeaRepository.findById(id) != null) {
@@ -36,22 +41,27 @@ public class TypeOfTeaService {
         }
     }
 
+    @Override
     public TypeOfTea[] getAll() {
         return typeOfTeaRepository.findAll();
     }
 
+    @Override
     public TypeOfTea getById(int id) {
         return typeOfTeaRepository.findById(id);
     }
 
+    @Override
     public TypeOfTea getByName(String name) {
         return typeOfTeaRepository.findByTypeName(name);
     }
 
+    @Override
     public TypeOfTea[] getByPartOfComment(String textToFind) {
         return typeOfTeaRepository.findByPartOfComment(textToFind);
     }
 
+    @Override
     public ResponseCode updateTypeNameByID(int id, String name) {
         if (name == null) {
             return ResponseCode.ERR_IS_NULL;
@@ -69,6 +79,7 @@ public class TypeOfTeaService {
         return ResponseCode.MSG_OK;
     }
 
+    @Override
     public ResponseCode updateCommentByID(int id, String comment) {
         if (comment == null) {
             return ResponseCode.ERR_IS_NULL;
@@ -83,6 +94,7 @@ public class TypeOfTeaService {
         return ResponseCode.MSG_OK;
     }
 
+    @Override
     public ResponseCode deleteById(int id) {
         TypeOfTea itemToDelete = typeOfTeaRepository.findById(id);
         if (itemToDelete == null) {
@@ -95,6 +107,7 @@ public class TypeOfTeaService {
         return ResponseCode.MSG_OK;
     }
 
+    @Override
     public ResponseCode sortTypOfTeaByName() {
         if (typeOfTeaRepository.findAll().length == 0){
             return ResponseCode.ERR_DB_IS_EMPTY;
@@ -103,9 +116,10 @@ public class TypeOfTeaService {
         return ResponseCode.MSG_OK;
     }
 
+    @Override
     public ResponseCode loadExampleOfTypeOfTeasIntoDB() {
         ResponseCode response = ResponseCode.MSG_OK;
-        for (TypeOfTea typeOfTea : InitDataBase.getsimpleTypeOfTea()){
+        for (TypeOfTea typeOfTea : ExampleData.getSimpleTypeOfTea()){
             ResponseCode responseCode = add(typeOfTea.getId(), typeOfTea.getTypeName(), typeOfTea.getComment());
             if (!responseCode.equals(ResponseCode.MSG_OK)) {
                 response = ResponseCode.ERR_SOMETHING_WENT_WRONG;

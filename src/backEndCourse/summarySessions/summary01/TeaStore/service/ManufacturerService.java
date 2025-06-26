@@ -1,19 +1,24 @@
 package backEndCourse.summarySessions.summary01.TeaStore.service;
 
-import backEndCourse.summarySessions.summary01.TeaStore.config.InitDataBase;
+import backEndCourse.summarySessions.summary01.TeaStore.config.ExampleData;
 import backEndCourse.summarySessions.summary01.TeaStore.config.ResponseCode;
 import backEndCourse.summarySessions.summary01.TeaStore.entity.Manufacturer;
 import backEndCourse.summarySessions.summary01.TeaStore.repository.ManufacturerRepository;
 
-public class ManufacturerService {
+public class ManufacturerService implements ManufacturerServiceInterface {
     private final ManufacturerRepository manufacturerRepository;
-    private final TeaService teaService;
+    private TeaServiceInterface teaService;
 
-    public ManufacturerService(ManufacturerRepository manufacturerRepository, TeaService teaService) {
+    public ManufacturerService(ManufacturerRepository manufacturerRepository) {
         this.manufacturerRepository = manufacturerRepository;
+    }
+
+    @Override
+    public void setTeaService(TeaServiceInterface teaService) {
         this.teaService = teaService;
     }
 
+    @Override
     public ResponseCode add(int id, String name, String comment) {
 
         if (manufacturerRepository.findById(id) != null) {
@@ -35,22 +40,26 @@ public class ManufacturerService {
         }
     }
 
+    @Override
     public Manufacturer[] getAll() {
         return manufacturerRepository.findAll();
     }
 
+    @Override
     public Manufacturer getById(int id) {
         return manufacturerRepository.findById(id);
     }
 
+    @Override
     public Manufacturer getByName(String name) {
         return manufacturerRepository.findByName(name);
     }
 
+    @Override
     public Manufacturer[] getByPartOfComment(String textToFind) {
         return manufacturerRepository.findByPartOfComment(textToFind);
     }
-
+    @Override
     public ResponseCode updateNameByID(int id, String name) {
         if (name == null) {
             return ResponseCode.ERR_IS_NULL;
@@ -68,6 +77,7 @@ public class ManufacturerService {
         return ResponseCode.MSG_OK;
     }
 
+    @Override
     public ResponseCode updateCommentByID(int id, String comment) {
         if (comment == null) {
             return ResponseCode.ERR_IS_NULL;
@@ -82,6 +92,7 @@ public class ManufacturerService {
         return ResponseCode.MSG_OK;
     }
 
+    @Override
     public ResponseCode deleteById(int id) {
         Manufacturer itemToDelete = manufacturerRepository.findById(id);
         if (itemToDelete == null) {
@@ -94,6 +105,7 @@ public class ManufacturerService {
         return ResponseCode.MSG_OK;
     }
 
+    @Override
     public ResponseCode sortManufacturersByName() {
         if (manufacturerRepository.findAll().length == 0){
             return ResponseCode.ERR_DB_IS_EMPTY;
@@ -102,9 +114,10 @@ public class ManufacturerService {
         return ResponseCode.MSG_OK;
     }
 
+    @Override
     public ResponseCode loadExampleOfManufacturersIntoDB() {
         ResponseCode response = ResponseCode.MSG_OK;
-        for (Manufacturer manufacturer : InitDataBase.getSimpleManufacturers()){
+        for (Manufacturer manufacturer : ExampleData.getSimpleManufacturers()){
             ResponseCode responseCode = add(manufacturer.getId(), manufacturer.getName(), manufacturer.getComment());
             if (!responseCode.equals(ResponseCode.MSG_OK)) {
                 response = ResponseCode.ERR_SOMETHING_WENT_WRONG;
