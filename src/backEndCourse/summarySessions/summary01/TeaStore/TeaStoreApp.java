@@ -6,7 +6,9 @@ import backEndCourse.summarySessions.summary01.TeaStore.controller.TypeOfTeaCont
 import backEndCourse.summarySessions.summary01.TeaStore.repository.ManufacturerRepository;
 import backEndCourse.summarySessions.summary01.TeaStore.repository.TeaRepository;
 import backEndCourse.summarySessions.summary01.TeaStore.repository.TypeOfTeaRepository;
-import backEndCourse.summarySessions.summary01.TeaStore.service.*;
+import backEndCourse.summarySessions.summary01.TeaStore.service.ManufacturerService;
+import backEndCourse.summarySessions.summary01.TeaStore.service.TeaService;
+import backEndCourse.summarySessions.summary01.TeaStore.service.TypeOfTeaService;
 import backEndCourse.summarySessions.summary01.TeaStore.userInterface.MenuManager;
 
 public class TeaStoreApp {
@@ -30,6 +32,5 @@ public class TeaStoreApp {
 
         MenuManager menuManager = new MenuManager(teaController, manufacturerController, typeOfTeaController);
         menuManager.mainMenu();
-
     }
 }

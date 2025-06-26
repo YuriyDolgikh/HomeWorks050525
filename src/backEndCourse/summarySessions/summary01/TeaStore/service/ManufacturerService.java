@@ -35,7 +35,7 @@ public class ManufacturerService implements ManufacturerServiceInterface {
         }
         if (manufacturerRepository.add(new Manufacturer(id, name, comment))) {
             return ResponseCode.MSG_OK;
-        }else {
+        } else {
             return ResponseCode.ERR_NO_FREE_SPACE;
         }
     }
@@ -59,6 +59,7 @@ public class ManufacturerService implements ManufacturerServiceInterface {
     public Manufacturer[] getByPartOfComment(String textToFind) {
         return manufacturerRepository.findByPartOfComment(textToFind);
     }
+
     @Override
     public ResponseCode updateNameByID(int id, String name) {
         if (name == null) {
@@ -107,7 +108,7 @@ public class ManufacturerService implements ManufacturerServiceInterface {
 
     @Override
     public ResponseCode sortManufacturersByName() {
-        if (manufacturerRepository.findAll().length == 0){
+        if (manufacturerRepository.findAll().length == 0) {
             return ResponseCode.ERR_DB_IS_EMPTY;
         }
         manufacturerRepository.sortByName();
@@ -117,7 +118,7 @@ public class ManufacturerService implements ManufacturerServiceInterface {
     @Override
     public ResponseCode loadExampleOfManufacturersIntoDB() {
         ResponseCode response = ResponseCode.MSG_OK;
-        for (Manufacturer manufacturer : ExampleData.getSimpleManufacturers()){
+        for (Manufacturer manufacturer : ExampleData.getSimpleManufacturers()) {
             ResponseCode responseCode = add(manufacturer.getId(), manufacturer.getName(), manufacturer.getComment());
             if (!responseCode.equals(ResponseCode.MSG_OK)) {
                 response = ResponseCode.ERR_SOMETHING_WENT_WRONG;

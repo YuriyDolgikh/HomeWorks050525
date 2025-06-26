@@ -1,6 +1,5 @@
 package backEndCourse.summarySessions.summary01.TeaStore.repository;
 
-
 import backEndCourse.summarySessions.summary01.TeaStore.entity.Manufacturer;
 
 import java.util.Arrays;
@@ -15,7 +14,7 @@ public class ManufacturerRepository {
     }
 
     public boolean add(Manufacturer manufacturer) {
-        if(itemCounter < manufacturers.length) {
+        if (itemCounter < manufacturers.length) {
             manufacturers[itemCounter++] = manufacturer;
             return true;
         }
@@ -27,8 +26,8 @@ public class ManufacturerRepository {
     }
 
     public Manufacturer findById(int id) {
-        for(Manufacturer manufacturer : findAll()) {
-            if(manufacturer.getId() == id) {
+        for (Manufacturer manufacturer : findAll()) {
+            if (manufacturer.getId() == id) {
                 return manufacturer;
             }
         }
@@ -36,8 +35,8 @@ public class ManufacturerRepository {
     }
 
     public Manufacturer findByName(String name) {
-        for(Manufacturer manufacturer : findAll()) {
-            if(manufacturer.getName().equalsIgnoreCase(name)) {
+        for (Manufacturer manufacturer : findAll()) {
+            if (manufacturer.getName().equalsIgnoreCase(name)) {
                 return manufacturer;
             }
         }
@@ -46,15 +45,15 @@ public class ManufacturerRepository {
 
     public Manufacturer[] findByPartOfComment(String textToFind) {
         int counter = 0;
-        for(Manufacturer manufacturer : findAll()) {
+        for (Manufacturer manufacturer : findAll()) {
             if (manufacturer.getComment().toLowerCase().contains(textToFind.toLowerCase())) {
                 counter++;
             }
         }
         Manufacturer[] manufacturers = new Manufacturer[counter];
         int index = 0;
-        for(Manufacturer manufacturer : findAll()) {
-            if(manufacturer.getComment().toLowerCase().contains(textToFind.toLowerCase())) {
+        for (Manufacturer manufacturer : findAll()) {
+            if (manufacturer.getComment().toLowerCase().contains(textToFind.toLowerCase())) {
                 manufacturers[index++] = manufacturer;
             }
         }
@@ -63,7 +62,7 @@ public class ManufacturerRepository {
 
     public void updateNameById(int id, String name) {
         Manufacturer itemToUpdate = findById(id);
-        if(itemToUpdate == null || findByName(name) != null) {
+        if (itemToUpdate == null || findByName(name) != null) {
             return;
         }
         itemToUpdate.setName(name);
@@ -71,7 +70,7 @@ public class ManufacturerRepository {
 
     public void updateCommentById(int id, String comment) {
         Manufacturer itemToUpdate = findById(id);
-        if(itemToUpdate == null) {
+        if (itemToUpdate == null) {
             return;
         }
         itemToUpdate.setComment(comment);
@@ -88,15 +87,15 @@ public class ManufacturerRepository {
         if (indexToDelete == -1) {
             return false;
         }
-        if (itemCounter == 1){
+        if (itemCounter == 1) {
             manufacturers[0] = null;
             itemCounter = 0;
         }
 
         for (int i = indexToDelete + 1; i < itemCounter; i++) {
-            manufacturers[i-1] = manufacturers[i];
+            manufacturers[i - 1] = manufacturers[i];
         }
-        manufacturers[itemCounter-1] = null;
+        manufacturers[itemCounter - 1] = null;
         itemCounter--;
         return true;
     }

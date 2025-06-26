@@ -16,7 +16,7 @@ public class TeaRepository {
     }
 
     public boolean add(Tea tea) {
-        if(itemCounter < teas.length) {
+        if (itemCounter < teas.length) {
             teas[itemCounter++] = tea;
             return true;
         }
@@ -28,8 +28,8 @@ public class TeaRepository {
     }
 
     public Tea findById(int id) {
-        for(Tea tea : findAll()) {
-            if(tea.getId() == id) {
+        for (Tea tea : findAll()) {
+            if (tea.getId() == id) {
                 return tea;
             }
         }
@@ -38,32 +38,32 @@ public class TeaRepository {
 
     public Tea[] findByManufacturer(Manufacturer manufacturer) {
         int counter = 0;
-        for(Tea tea : findAll()) {
-            if(tea.getManufacturer().equals(manufacturer)) {
+        for (Tea tea : findAll()) {
+            if (tea.getManufacturer().equals(manufacturer)) {
                 counter++;
             }
         }
         Tea[] teas = new Tea[counter];
         int index = 0;
         for (Tea tea : findAll()) {
-            if(tea.getManufacturer().equals(manufacturer)) {
+            if (tea.getManufacturer().equals(manufacturer)) {
                 teas[index++] = tea;
             }
         }
         return teas;
     }
 
-    public Tea[] findByTypeOfTea(TypeOfTea typeOfTea)  {
+    public Tea[] findByTypeOfTea(TypeOfTea typeOfTea) {
         int counter = 0;
-        for(Tea tea : findAll()) {
-            if(tea.getType().equals(typeOfTea)) {
+        for (Tea tea : findAll()) {
+            if (tea.getType().equals(typeOfTea)) {
                 counter++;
             }
         }
         Tea[] teas = new Tea[counter];
         int index = 0;
         for (Tea tea : findAll()) {
-            if(tea.getType().equals(typeOfTea)) {
+            if (tea.getType().equals(typeOfTea)) {
                 teas[index++] = tea;
             }
         }
@@ -72,15 +72,15 @@ public class TeaRepository {
 
     public Tea[] findByVariety(String variety) {
         int counter = 0;
-        for(Tea tea : findAll()) {
-            if(tea.getVariety().toLowerCase().contains(variety.toLowerCase())) {
+        for (Tea tea : findAll()) {
+            if (tea.getVariety().toLowerCase().contains(variety.toLowerCase())) {
                 counter++;
             }
         }
         Tea[] teas = new Tea[counter];
         int index = 0;
         for (Tea tea : findAll()) {
-            if(tea.getVariety().toLowerCase().contains(variety.toLowerCase())) {
+            if (tea.getVariety().toLowerCase().contains(variety.toLowerCase())) {
                 teas[index++] = tea;
             }
         }
@@ -89,15 +89,15 @@ public class TeaRepository {
 
     public Tea[] findByManufacturerAndTypeOfTea(Manufacturer manufacturer, TypeOfTea typeOfTea) {
         int counter = 0;
-        for(Tea tea : findAll()) {
-            if(tea.getManufacturer().equals(manufacturer) && tea.getType().equals(typeOfTea)) {
+        for (Tea tea : findAll()) {
+            if (tea.getManufacturer().equals(manufacturer) && tea.getType().equals(typeOfTea)) {
                 counter++;
             }
         }
         Tea[] teas = new Tea[counter];
         int index = 0;
         for (Tea tea : findAll()) {
-            if(tea.getManufacturer().equals(manufacturer) && tea.getType().equals(typeOfTea)) {
+            if (tea.getManufacturer().equals(manufacturer) && tea.getType().equals(typeOfTea)) {
                 teas[index++] = tea;
             }
         }
@@ -106,7 +106,7 @@ public class TeaRepository {
 
     public boolean updateManufacturerById(int id, Manufacturer manufacturer) {
         Tea itemToUpdate = findById(id);
-        if(itemToUpdate == null) {
+        if (itemToUpdate == null) {
             return false;
         }
         itemToUpdate.setManufacturer(manufacturer);
@@ -115,7 +115,7 @@ public class TeaRepository {
 
     public boolean updateTypeOfTeaById(int id, TypeOfTea typeOfTea) {
         Tea itemToUpdate = findById(id);
-        if(itemToUpdate == null) {
+        if (itemToUpdate == null) {
             return false;
         }
         itemToUpdate.setType(typeOfTea);
@@ -124,7 +124,7 @@ public class TeaRepository {
 
     public boolean updateVarietyById(int id, String variety) {
         Tea itemToUpdate = findById(id);
-        if(itemToUpdate == null) {
+        if (itemToUpdate == null) {
             return false;
         }
         itemToUpdate.setVariety(variety);
@@ -142,14 +142,14 @@ public class TeaRepository {
         if (indexToDelete == -1) {
             return false;
         }
-        if (itemCounter == 1){
+        if (itemCounter == 1) {
             teas[0] = null;
             itemCounter = 0;
         }
         for (int i = indexToDelete + 1; i < itemCounter; i++) {
-            teas[i-1] = teas[i];
+            teas[i - 1] = teas[i];
         }
-        teas[itemCounter-1] = null;
+        teas[itemCounter - 1] = null;
         itemCounter--;
         return true;
     }

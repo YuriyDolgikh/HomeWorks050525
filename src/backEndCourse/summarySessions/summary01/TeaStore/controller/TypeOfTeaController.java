@@ -19,10 +19,10 @@ public class TypeOfTeaController {
         return typeOfTeaService.add(id, name, comment).getMessage();
     }
 
-    public  String getAllTypeOfTea() {
+    public String getAllTypeOfTea() {
         StringBuilder sb = new StringBuilder("Type of tea list:").append(System.lineSeparator());
         TypeOfTea[] typeOfTeas = typeOfTeaService.getAll();
-        if(typeOfTeas.length == 0) {
+        if (typeOfTeas.length == 0) {
             sb.append(ResponseCode.ERR_DB_IS_EMPTY);
         } else {
             for (TypeOfTea typeOfTea : typeOfTeas) {
@@ -35,7 +35,7 @@ public class TypeOfTeaController {
     public String getTypeOfTeaById() {
         int id = UserInputStatic.inputInt("Please enter the type of tea id: ");
         TypeOfTea typeOfTea = typeOfTeaService.getById(id);
-        if(typeOfTea == null) {
+        if (typeOfTea == null) {
             return ResponseCode.ERR_ID_NOT_FOUND.getMessage();
         }
         return typeOfTea.toString();
@@ -44,7 +44,7 @@ public class TypeOfTeaController {
     public String getTypeOfTeasByName() {
         String name = UserInputStatic.inputText("Please enter the type of tea name: ");
         TypeOfTea typeOfTea = typeOfTeaService.getByName(name);
-        if(typeOfTea == null) {
+        if (typeOfTea == null) {
             return ResponseCode.ERR_NAME_NOT_FOUND.getMessage();
         }
         return typeOfTea.toString();
@@ -54,7 +54,7 @@ public class TypeOfTeaController {
         String textToFind = UserInputStatic.inputText("Please enter the part of comment to find: ");
         StringBuilder sb = new StringBuilder("Type of teas by comments list:").append(System.lineSeparator());
         TypeOfTea[] typeOfTeas = typeOfTeaService.getByPartOfComment(textToFind);
-        if(typeOfTeas.length == 0) {
+        if (typeOfTeas.length == 0) {
             sb.append(ResponseCode.ERR_NO_RECORDS_FOUND);
         } else {
             for (TypeOfTea typeOfTea : typeOfTeas) {

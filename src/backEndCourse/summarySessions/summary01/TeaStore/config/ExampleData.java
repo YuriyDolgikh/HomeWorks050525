@@ -7,7 +7,7 @@ import backEndCourse.summarySessions.summary01.TeaStore.entity.TypeOfTea;
 public class ExampleData {
 
     public static Manufacturer[] getSimpleManufacturers() {
-        Manufacturer[] simpleManufacturers =  new Manufacturer[5];
+        Manufacturer[] simpleManufacturers = new Manufacturer[5];
         simpleManufacturers[0] = new Manufacturer(12, "Lipton", "Comment 1");
         simpleManufacturers[1] = new Manufacturer(13, "Tess", "Comment 2");
         simpleManufacturers[2] = new Manufacturer(14, "Ahmad", "Comment 3");
@@ -17,12 +17,12 @@ public class ExampleData {
     }
 
     public static TypeOfTea[] getSimpleTypeOfTea() {
-        TypeOfTea[] simpleTypeOfTea =new TypeOfTea[4];
+        TypeOfTea[] simpleTypeOfTea = new TypeOfTea[4];
         simpleTypeOfTea[0] = new TypeOfTea(101, "Black", "Comment 133");
         simpleTypeOfTea[1] = new TypeOfTea(102, "Green", "Comment 152");
         simpleTypeOfTea[2] = new TypeOfTea(103, "Herbal ", "Comment 153");
         simpleTypeOfTea[3] = new TypeOfTea(104, "Fruit", "Comment 154");
-        return  simpleTypeOfTea;
+        return simpleTypeOfTea;
     }
 
     public static Tea[] getSimpleTea() {
