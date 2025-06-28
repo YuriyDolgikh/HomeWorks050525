@@ -1,30 +1,5 @@
 package backEndCourse.summarySessions.summaryBE01.studentManagementSystem;
 
-/*
-**Система управления студентами**
-
-    - Реализуйте систему, которая хранит информацию о студентах и их оценках по различным предметам.
-    - Используйте коллекцию для хранения информации.
-
-    Технические требования:
-
-        - Создайте класс Student, который содержит поля:
-            имя студента,
-            уникальный идентификатор (ID)
-            HashMap<String, Integer>, где ключ - это название предмета, а значение - оценка по этому предмету.
-
-        - Создайте класс StudentManagement, который будет управлять студентами.
-          Этот класс должен содержать HashMap<Integer, Student>, где ключ - ID студента, а значение - объект Student.
-
-        Реализуйте следующие методы в классе StudentManagement:
-                void addStudent(int id, String name): добавление студента в систему.
-                void addGrade(int id, String subject, int grade): добавление оценки студенту по определенному предмету.
-                Student getStudent(int id): получение информации о студенте по ID.
-                double getAverageGrade(int id): получение среднего балла студента по всем предметам.
-
-
- */
-
 import java.util.HashMap;
 import java.util.Map;
 

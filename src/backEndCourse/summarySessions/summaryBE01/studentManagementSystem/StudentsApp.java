@@ -9,9 +9,9 @@ public class StudentsApp {
         String geography = "Geography";
         String literature = "Literature";
 
-        Student student1 = new Student(1,"Johnson");
-        Student student2 = new Student(2,"Smith");
-        Student student3 = new Student(3,"Williams");
+        Student student1 = new Student(1, "Johnson");
+        Student student2 = new Student(2, "Smith");
+        Student student3 = new Student(3, "Williams");
 
         studentManagement.addStudent(student1);
         studentManagement.addStudent(student2);
