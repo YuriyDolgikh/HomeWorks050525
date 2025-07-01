@@ -1,4 +1,4 @@
-package backEndCourse.lesson06.studentManagementSystem;
+package backEndCourse.lesson06.students;
 
 import java.util.*;
 
