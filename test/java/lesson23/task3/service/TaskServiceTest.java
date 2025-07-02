@@ -1,7 +1,8 @@
 package lesson23.task3.service;
 
-import lesson23.task3.model.Task;
-import lesson23.task3.repository.TaskRepository;
+import javaBasicCourse.lesson23.task3.model.Task;
+import javaBasicCourse.lesson23.task3.repository.TaskRepository;
+import javaBasicCourse.lesson23.task3.service.TaskService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

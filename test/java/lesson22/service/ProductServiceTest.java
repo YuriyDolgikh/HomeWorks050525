@@ -1,7 +1,8 @@
 package lesson22.service;
 
-import lesson22.model.Product;
-import lesson22.repository.ProductRepository;
+import javaBasicCourse.lesson22.model.Product;
+import javaBasicCourse.lesson22.repository.ProductRepository;
+import javaBasicCourse.lesson22.service.ProductService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

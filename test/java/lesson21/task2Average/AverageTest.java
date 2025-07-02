@@ -1,5 +1,6 @@
 package lesson21.task2Average;
 
+import javaBasicCourse.lesson21.task2Average.Average;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
