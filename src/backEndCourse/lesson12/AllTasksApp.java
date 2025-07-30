@@ -18,7 +18,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.*;
 
-@SuppressWarnings("ALL")
 public class AllTasksApp {
     public static <T> void main(String[] args) {
 
