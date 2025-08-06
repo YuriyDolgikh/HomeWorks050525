@@ -1,0 +1,9 @@
+Integer,sum,234,34,785,234,56
+String,count,Java,Python,C++,JS,Pascal
+Double,avg,23.45,45.33,66.34,0.77,98.1
+Integer,mult,12,34,111,1,99
+Integer,mult
+String,print,Java,Python,C++,JS,Pascal
+Double,max,23.45,45.33,66.34,0.77,98.1
+
+Double,min,23.45,45.33,66.34,0.77,98.1
