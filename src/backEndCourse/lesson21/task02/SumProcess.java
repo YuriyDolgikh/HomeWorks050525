@@ -4,7 +4,7 @@ public class SumProcess {
 
     private int sum = 0;
 
-    public void add(int number) {
+    public synchronized void add(int number) {
         sum += number;
     }
 
